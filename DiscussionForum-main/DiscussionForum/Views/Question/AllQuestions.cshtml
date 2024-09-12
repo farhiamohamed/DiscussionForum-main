@@ -1,0 +1,72 @@
+﻿@model QuestionListViewModel
+
+@{
+    ViewData["Title"] = "Browse";
+}
+
+<h1 class="text-center mb-4">List of questions</h1>
+
+<div class="d-flex flex-column gap-3">
+    <form asp-action="AllQuestions" class="flex-grow-1 search-container position-relative" method="get">
+        <input type="text" asp-for="SearchQuery" class="w-100 py-2 px-3" placeholder="Search for questions" />
+        <input type="submit" value="Search" class="search-btn position-absolute h-100 px-2" />
+    </form>
+    
+    <div>
+        @foreach (var question in Model.PaginatedList)
+        {
+            <a class="question-card" asp-controller="Question" asp-action="Details" asp-route-id="@question.QuestionId">
+                <div class="py-3 forum-border">
+                    <partial name="_QuestionOverviewCard" model="question" />
+                </div>
+            </a>
+        }
+    </div>
+
+    @{
+        var previousButtonDisabled = !Model.PaginatedList.HasPreviousPage ? "disabled" : "";
+        var nextButtonDisabled = !Model.PaginatedList.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="d-flex flex-column gap-2 align-items-end">
+        <div class="d-flex gap-4">
+            <a asp-action="AllQuestions" asp-route-searchQuery="@Model.SearchQuery" asp-route-pageNr="@(Model.PaginatedList.PageNr - 1)" class="fw-bolder @previousButtonDisabled">
+                Previous
+            </a>
+            <a asp-action="AllQuestions" asp-route-searchQuery="@Model.SearchQuery" asp-route-pageNr="@(Model.PaginatedList.PageNr + 1)" class="fw-bolder @nextButtonDisabled">
+                Next
+            </a>
+        </div>
+        <div>
+            @if (Model.PaginatedList.Count == 0)
+            {
+                <p class="small">No questions found</p>
+            }
+            else
+            {
+                <p class="small">Showing page @Model.PaginatedList.PageNr of @Model.PaginatedList.TotalPages</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .disabled {
+        pointer-events: none;
+        color: #212529;
+    }
+
+    .search-btn {
+        top: 0;
+        right: 0;
+        border: none;
+        border-radius: 0;
+        background-color: #232b4c;
+        color: inherit;
+    }
+
+    .question-card:hover {
+        color: inherit;
+    }
+</style>

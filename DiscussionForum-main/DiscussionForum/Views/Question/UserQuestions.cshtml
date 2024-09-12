@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Question>
+
+@{
+    ViewData["Title"] = "User questions";
+}
+
+<h1 class="text-center mb-4">Questions posted by you</h1>
+
+@foreach (var question in Model)
+{
+    <div class="py-3 forum-border d-flex">
+        <a asp-action="Details" asp-route-id="@question.QuestionId" class="w-100 d-flex justify-content-between question-card">
+            <partial name="_QuestionOverviewCard" model="@question" />
+
+            <div class="d-flex gap-4 fit-content">
+                <a asp-action="Update" asp-route-id="@question.QuestionId">
+                    Edit
+                </a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#modal-@question.QuestionId">
+                    Delete
+                </a>
+            </div>
+        </a>
+    </div>
+
+    <partial name="_DeleteModal" model="question" />
+}
+
+<style>
+    .fit-content {
+        height: fit-content;
+    }
+
+    .question-card:hover{
+        color:inherit;
+    }
+</style>

@@ -1,0 +1,49 @@
+﻿@model Question
+
+<div class="d-flex gap-3">
+    <div class="user-img-container">
+        <img class="img-fluid rounded-circle" src="@Model.User.ImageUrl" alt="User image" />
+    </div>
+
+    <div>
+        <h5 class="fw-bolder m-0">@Model.Title</h5>
+
+        <p>By <span class="fw-bolder">@Model.User.UserName</span> on @Model.Created.ToString("yyyy-MM-dd")</p>
+
+        <p>@Model.Content</p>
+        @if (Model.Replies != null)
+        {
+            <span>@Model.Replies.Count() @((Model.Replies.Count() == 1) ? "reply" : "replies")</span>
+        }
+        <small class="m-0 category py-2 px-2">@Model.Category.Title</small>
+    </div>
+
+</div>
+
+<style>
+    .forum-border {
+        border-bottom: 1px solid #2a272e;
+    }
+
+    .delete-btn {
+        background: none;
+        outline: none;
+        padding: 0;
+        border: none;
+    }
+
+    p {
+        margin-bottom: 0.5rem;
+    }
+
+    .user-img-container {
+        width: 50px;
+    }
+
+    .category {
+        font-size: 12px;
+        background: #242b4c;
+        width: fit-content;
+        border-radius: 1rem;
+    }
+</style>

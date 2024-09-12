@@ -1,0 +1,40 @@
+﻿@model Question
+
+<div class="modal fade" id="modal-@Model.QuestionId" tabindex="-1" aria-labelledby="modal-@Model.QuestionId" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Delete confirmation</h4>
+                <button type="button" class="py-0 px-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark fa-lg"></i>
+                </button>
+            </div>
+            <hr class="my-0 mx-3" />
+            <div class="modal-body">
+                <h6>Are you sure you want to delete the following post?</h6>
+                <p class="fw-bolder my-3 mx-0">"@Model.Title"</p>
+            </div>
+            <form asp-action="DeleteConfirmed" asp-route-id="@Model.QuestionId" method="post" class="modal-footer">
+                <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .modal-content {
+        background: #2c374e;
+        border-radius:0;
+    }
+
+    .modal-footer, .modal-header {
+        border: none;
+    }
+
+    button {
+        outline: none;
+        border: none;
+    }
+</style>

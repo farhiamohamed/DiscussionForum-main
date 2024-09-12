@@ -1,0 +1,42 @@
+﻿@model Reply
+
+<div class="d-flex gap-4 w-100">
+    <div class="user-img-container">
+        <img class="img-fluid rounded-circle" src="@Model.User.ImageUrl" alt="User image" />
+    </div>
+    <div class="w-100">
+        <div>
+            <h6 class="fw-bolder m-0">@Model.User.UserName</h6>
+            <p class="mb-2">@Model.Created.ToString("yyyy-MM-dd HH:mm")</p>
+        </div>
+        <p id="staticContent-@Model.ReplyId" class="m-0">@Model.Content</p>
+
+        <form style="display:none;" id="dynamicContent-@Model.ReplyId" asp-controller="Reply" asp-action="Update">
+            <input type="hidden" asp-for="@Model.ReplyId" />
+            <input type="hidden" asp-for="@Model.QuestionId" />
+
+            <div class="form-group mb-3">
+                <textarea rows="3" class="form-control py-1 px-2 w-100" asp-for="@Model.Content"></textarea>
+                <span asp-validation-for="@Model.Content" class="text-danger"></span>
+            </div>
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a id="cancelEditBtn-@Model.ReplyId" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+       $("#editBtn-@Model.ReplyId").click(function () {
+           $('#staticContent-@Model.ReplyId').hide();
+           $('#dynamicContent-@Model.ReplyId').show();
+       });
+       $("#cancelEditBtn-@Model.ReplyId").click(function () {
+           $('#staticContent-@Model.ReplyId').show();
+           $('#dynamicContent-@Model.ReplyId').hide();
+       });
+   });
+</script>
+

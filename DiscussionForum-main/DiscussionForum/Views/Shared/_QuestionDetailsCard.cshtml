@@ -1,0 +1,14 @@
+﻿@model Question
+
+<div class="d-flex gap-4">
+    <div class="user-img-container">
+        <img class="img-fluid rounded-circle" src="@Model.User.ImageUrl" alt="User image" />
+    </div>
+    <div class="w-100">
+        <div>
+            <h6 class="fw-bolder m-0">@Model.User.UserName</h6>
+            <p class="mb-2">@Model.Created.ToString("yyyy-MM-dd")</p>
+        </div>
+        <p class="m-0">@Model.Content</p>
+    </div>
+</div>

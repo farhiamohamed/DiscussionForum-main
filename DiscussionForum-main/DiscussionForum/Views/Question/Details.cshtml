@@ -1,0 +1,63 @@
+﻿@model QuestionDetailViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="my-5 border p-3 rounded-2">
+
+    <partial name="_QuestionDetailsCard" model="@Model.Question" />
+
+    <div class="p-3 margin d-flex flex-column gap-3">
+        @if (Model.Question.Replies != null && Model.Question.Replies.Count() > 0)
+        {
+            <div class="d-flex flex-column gap-3">
+                @foreach (var reply in @Model.Question.Replies)
+                 {
+                    <div class="d-flex justify-content-between card-bg px-3 py-2 rounded-3">
+                        <partial name="_QuestionReplyCard" model="reply" />
+                        @if (Model.UserId == reply.User.Id)
+                         {
+                            <a class="editBtn" id="editBtn-@reply.ReplyId">Edit</a>
+                         }
+
+                    </div>
+                 }
+            </div>
+        }
+
+        <form asp-controller="Reply" asp-action="Create" class="d-flex gap-3">
+            <input type="hidden" asp-for="Question.QuestionId" />
+
+            <div class="form-group w-100">
+                <input asp-for="ReplyContent" class="py-2 px-3 w-100" placeholder="Write a reply" />
+                <span asp-validation-for="ReplyContent" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary submit-btn py-2 px-3 rounded-5" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<style>
+    .user-img-container {
+        width: 50px;
+    }
+
+    .card-bg {
+        background: #1e1d21;
+    }
+
+    .margin {
+        margin-left: 5rem;
+    }
+
+    .submit-btn{
+        height: fit-content;
+    }
+
+    .editBtn:hover {
+        color: #649ef4;
+    }
+</style>
