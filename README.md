@@ -1,5 +1,5 @@
 Discussion Forum Web Application
-This project is a comprehensive implementation of a discussion forum web application, developed using ASP.NET Core 6.0 and the Model-View-Controller (MVC) framework. It is inspired by platforms like Stack Overflow, allowing users to ask and answer code-related questions.
+#This project is a comprehensive implementation of a discussion forum web application, developed using ASP.NET Core 6.0 and the Model-View-Controller (MVC) framework. It is inspired by platforms like Stack Overflow, allowing users to ask and answer code-related questions.
 
 #Project Description: This web application serves as a discussion forum where users can ask questions and respond to others' queries, specifically focused on coding and technical topics. The key highlights of the project are:
 
